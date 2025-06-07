@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn SmartLink Post Creator - Working Version</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+```
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+        background: #f3f2ef;
+        padding: 20px;
+        color: #000000e6;
+    }
+    
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        overflow: hidden;
+    }
+    
+    .header {
+        background: #0a66c2;
+        color: white;
+        padding: 30px;
+        text-align: center;
+    }
+    
+    .header h1 {
+        font-size: 28px;
+        margin-bottom: 10px;
+    }
+    
+    .header p {
+        font-size: 16px;
+        opacity: 0.9;
+    }
+    
+    .demo-section {
+        padding: 30px;
+    }
+    
+    .section-title {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: #0a66c2;
+    }
+    
+    .linkedin-post {
+        background: #f8f9fa;
+        border: 1px solid #e6e6e6;
+        border-radius: 8px;
+        padding: 25px;
+        line-height: 1.6;
+        font-size: 15px;
+        position: relative;
+    }
+    
+    .smart-link {
+        color: #0a66c2;
+        text-decoration: underline;
+        position: relative;
+        cursor: pointer;
+        font-weight: 500;
+    }
+    
+    .smart-link:hover {
+        color: #084d94;
+    }
+    
+    .i-indicator {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        height: 18px;
+        background: #0a66c2;
+        color: white;
+        border-radius: 50%;
+        font-size: 11px;
+        font-style: italic;
+        font-weight: bold;
+        margin-left: 4px;
+        position: relative;
+        top: -1px;
+        transition: all 0.3s ease;
+        z-index: 10;
+    }
+    
+    .smart-link:hover .i-indicator {
+        background: #084d94;
+        transform: scale(1.1);
+    }
+    
+    .visit-link-btn {
+        background: #0a66c2;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 600;
+        margin-top: 15px;
+        transition: background 0.3s ease;
+    }
+    
+    .visit-link-btn:hover {
+        background: #084d94;
+    }
+    
+    .popup {
+        position: fixed;
+        background: white;
+        border: 1px solid #e6e6e6;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        width: 400px;
+        max-width: 90vw;
+        z-index: 1000;
+        display: none;
+    }
+    
+    .popup.show {
+        display: block;
+        animation: popupSlide 0.3s ease-out;
+    }
+    
+    @keyframes popupSlide {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .popup-header {
+        background: #0a66c2;
+        color: white;
+        padding: 15px 20px;
+        border-radius: 12px 12px 0 0;
+        font-weight: 600;
+        font-size: 16px;
+        position: relative;
+    }
+    
+    .close-btn {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .close-btn:hover {
+        background: rgba(255,255,255,0.2);
+    }
+    
+    .popup-tabs {
+        display: flex;
+        border-bottom: 1px solid #e6e6e6;
+    }
+    
+    .tab {
+        flex: 1;
+        padding: 12px 8px;
+        text-align: center;
+        background: #f8f9fa;
+        border: none;
+        font-size: 13px;
+        font-weight: 600;
+        color: #666;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .tab:hover {
+        background: rgba(10, 102, 194, 0.1);
+        color: #0a66c2;
+    }
+    
+    .tab.active {
+        background: white;
+        color: #0a66c2;
+        border-bottom: 2px solid #0a66c2;
+    }
+    
+    .popup-content {
+        padding: 20px;
+        font-size: 14px;
+        line-height: 1.6;
+        min-height: 120px;
+    }
+    
+    .tab-content {
+        display: none;
+    }
+    
+    .tab-content.active {
+        display: block;
+    }
+    
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.3);
+        z-index: 999;
+        display: none;
+    }
+    
+    .instruction {
+        background: #e8f4fd;
+        border-left: 4px solid #0a66c2;
+        padding: 15px;
+        margin-bottom: 20px;
+        border-radius: 0 8px 8px 0;
+    }
+    
+    .instruction strong {
+        color: #0a66c2;
+    }
+    
+    @media (max-width: 768px) {
+        .popup {
+            width: 350px;
+        }
+        
+        .tab {
+            font-size: 12px;
+            padding: 10px 6px;
+        }
+    }
+</style>
+```
+
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>LinkedIn SmartLink Post Creator</h1>
+            <p>Experience how SmartLinks transform regular LinkedIn posts</p>
+        </div>
+
+```
+    <div class="demo-section">
+        <div class="instruction">
+            <strong>Try it now:</strong> Click on any blue underlined text with an "i" indicator below to see how SmartLinks work!
+        </div>
+        
+        <h2 class="section-title">Enhanced LinkedIn Post Preview</h2>
+        
+        <div class="linkedin-post">
+            🚀 After 35 years, we're finally fixing the web's biggest usability problem.
+
+            <br><br>Here's what happened: I was researching <span class="smart-link" onclick="handleSmartLinkClick(event, 'oracle', 'https://en.wikipedia.org/wiki/Oracle_Corporation')">Oracle's early days<span class="i-indicator" onclick="event.stopPropagation(); showPopup('oracle')">i</span></span> and realized they built a $100B+ company by solving business data chaos across incompatible systems in 1977.
+
+            <br><br>Today, we have the exact same problem with <span class="smart-link" onclick="handleSmartLinkClick(event, 'webinfo', 'https://www.nngroup.com/articles/information-architecture-ia/')">web information organization<span class="i-indicator" onclick="event.stopPropagation(); showPopup('webinfo')">i</span></span>. Users abandon 47% of research sessions because clicking links destroys context and creates tab chaos.
+
+            <br><br>So we built <span class="smart-link" onclick="handleSmartLinkClick(event, 'smartlinks', 'https://itabs.co')">SmartLinks<span class="i-indicator" onclick="event.stopPropagation(); showPopup('smartlinks')">i</span></span> - enhanced hyperlinks with "i" indicators that provide organized, contextual information without forcing you to leave the page.
+
+            <br><br>The impact? Our beta users report 3x faster research, dramatically better user engagement, and conversion rate improvements of 30-40%.
+
+            <br><br>Think about it: Oracle solved business data organization for 50M companies. SmartLinks could solve web information organization for 2B+ websites.
+
+            <br><br>This isn't just another tool - it's potentially the next fundamental web infrastructure layer.
+
+            <br><br>What do you think? Are we onto something here? 🤔
+
+            <br><br>#WebInnovation #UserExperience #TechInfrastructure
+        </div>
+    </div>
+</div>
+
+<!-- Overlay -->
+<div class="overlay" id="overlay" onclick="closeAllPopups()"></div>
+
+<!-- SmartLinks Popup -->
+<div class="popup" id="popup-smartlinks">
+    <div class="popup-header">
+        SmartLinks
+        <button class="close-btn" onclick="closeAllPopups()">&times;</button>
+    </div>
+    <div class="popup-tabs">
+        <button class="tab active" onclick="switchTab('smartlinks', 0)">Overview</button>
+        <button class="tab" onclick="switchTab('smartlinks', 1)">Details</button>
+        <button class="tab" onclick="switchTab('smartlinks', 2)">Business</button>
+    </div>
+    <div class="popup-content">
+        <div class="tab-content active">
+            Enhanced hyperlinks with 'i' indicators that provide organized, contextual information without forcing users to leave their current page.
+            <br><br>
+            <button class="visit-link-btn" onclick="window.open('https://itabs.co', '_blank')">Visit iTabs Website</button>
+        </div>
+        <div class="tab-content">
+            SmartLinks solve the fundamental web navigation problem where 47% of users abandon research because clicking traditional links destroys context. They use familiar 'i' icons that open tabbed information displays (Overview | Features | Benefits | Technical Details) right where users need them.
+            <br><br>
+            <button class="visit-link-btn" onclick="window.open('https://itabs.co', '_blank')">Learn More</button>
+        </div>
+        <div class="tab-content">
+            Companies using SmartLinks report 30-40% conversion improvements, 3x faster user research, and dramatically reduced bounce rates. Perfect for affiliate marketing, product documentation, and any content where users need additional context.
+            <br><br>
+            <button class="visit-link-btn" onclick="window.open('https://itabs.co', '_blank')">See Business Benefits</button>
+        </div>
+    </div>
+</div>
+
+<!-- Oracle Popup -->
+<div class="popup" id="popup-oracle">
+    <div class="popup-header">
+        Oracle's Early Days
+        <button class="close-btn" onclick="closeAllPopups()">&times;</button>
+    </div>
+    <div class="popup-tabs">
+        <button class="tab active" onclick="switchTab('oracle', 0)">Overview</button>
+        <button class="tab" onclick="switchTab('oracle', 1)">Details</button>
+        <button class="tab" onclick="switchTab('oracle', 2)">Business</button>
+    </div>
+    <div class="popup-content">
+        <div class="tab-content active">
+            Oracle was founded in 1977 by Larry Ellison to solve the massive problem of business data scattered across incompatible systems.
+            <br><br>
+            <button class="visit-link-btn" onclick="window.open('https://en.wikipedia.org/wiki/Oracle_Corporation', '_blank')">Read Oracle History</button>
+        </div>
+        <div class="tab-content">
+            In the 1970s, businesses struggled with data trapped in incompatible databases and systems. Oracle created the first commercial SQL database, allowing companies to organize and access their information systematically. This solved a universal business problem and created a $100B+ infrastructure company.
+            <br><br>
+            <button class="visit-link-btn" onclick="window.open('https://en.wikipedia.org/wiki/Oracle_Corporation', '_blank')">Learn More About Oracle</button>
+        </div>
+        <div class="tab-content">
+            Oracle's success demonstrates how solving fundamental information organization problems creates massive value. The parallel to web information chaos suggests similar infrastructure opportunity potential.
+            <br><br>
+            <button class="visit-link-btn" onclick="window.open('https://en.wikipedia.org/wiki/Oracle_Corporation', '_blank')">Explore the Parallel</button>
+        </div>
+    </div>
+</div>
+
+<!-- Web Information Popup -->
+<div class="popup" id="popup-webinfo">
+    <div class="popup-header">
+        Web Information Organization
+        <button class="close-btn" onclick="closeAllPopups()">&times;</button>
+    </div>
+    <div class="popup-tabs">
+        <button class="tab active" onclick="switchTab('webinfo', 0)">Overview</button>
+        <button class="tab" onclick="switchTab('webinfo', 1)">Details</button>
+        <button class="tab" onclick="switchTab('webinfo', 2)">Business</button>
+    </div>
+    <div class="popup-content">
+        <div class="tab-content active">
+            The systematic arrangement of scattered web content to make information findable, accessible, and useful without context switching.
+            <br><br>
+            <button class="visit-link-btn" onclick="window.open('https://www.nngroup.com/articles/information-architecture-ia/', '_blank')">Learn About Information Architecture</button>
+        </div>
+        <div class="tab-content">
+            Currently, web information is fragmented across billions of pages with no systematic organization. Users waste time opening multiple tabs, losing context, and struggling to compare information. This creates a $436B annual productivity loss from research abandonment.
+            <br><br>
+            <button class="visit-link-btn" onclick="window.open('https://www.nngroup.com/articles/information-architecture-ia/', '_blank')">Read Research Data</button>
+        </div>
+        <div class="tab-content">
+            Solving web information organization could impact 2B+ websites vs Oracle's 50M business customers - potentially 40x larger addressable market. First-mover advantage in this space could create the next fundamental web infrastructure layer.
+            <br><br>
+            <button class="visit-link-btn" onclick="window.open('https://www.nngroup.com/articles/information-architecture-ia/', '_blank')">Explore the Opportunity</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let currentPopup = null;
+
+    function handleSmartLinkClick(event, popupId, destinationUrl) {
+        // If they click the text (not the 'i'), go to the destination
+        window.open(destinationUrl, '_blank');
+    }
+
+    function showPopup(popupId) {
+        // Close any existing popup
+        closeAllPopups();
+        
+        // Show overlay
+        document.getElementById('overlay').style.display = 'block';
+        
+        // Show the popup
+        const popup = document.getElementById('popup-' + popupId);
+        popup.classList.add('show');
+        
+        // Position popup in center of screen
+        popup.style.top = '50%';
+        popup.style.left = '50%';
+        popup.style.transform = 'translate(-50%, -50%)';
+        
+        currentPopup = popup;
+        
+        console.log('Popup shown:', popupId);
+    }
+
+    function closeAllPopups() {
+        // Hide overlay
+        document.getElementById('overlay').style.display = 'none';
+        
+        // Hide all popups
+        const popups = document.querySelectorAll('.popup');
+        popups.forEach(popup => {
+            popup.classList.remove('show');
+        });
+        
+        currentPopup = null;
+        console.log('All popups closed');
+    }
+
+    function switchTab(popupId, tabIndex) {
+        const popup = document.getElementById('popup-' + popupId);
+        
+        // Remove active from all tabs and contents
+        const tabs = popup.querySelectorAll('.tab');
+        const contents = popup.querySelectorAll('.tab-content');
+        
+        tabs.forEach(tab => tab.classList.remove('active'));
+        contents.forEach(content => content.classList.remove('active'));
+        
+        // Add active to selected tab and content
+        tabs[tabIndex].classList.add('active');
+        contents[tabIndex].classList.add('active');
+        
+        console.log('Switched to tab:', tabIndex, 'in popup:', popupId);
+    }
+
+    // Close popup when pressing Escape key
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            closeAllPopups();
+        }
+    });
+
+    console.log('SmartLinks demo ready!');
+</script>
+```
+
+</body>
+</html>
