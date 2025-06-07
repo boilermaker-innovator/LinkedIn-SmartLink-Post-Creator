@@ -494,3 +494,646 @@
 
 </body>
 </html>
+<br>
+<br>
+<br>
+<Br>
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartLinks Generator - Simple Form</title>
+
+```
+<!-- Meta tags for social sharing -->
+<meta name="description" content="Create interactive SmartLinks content in minutes. Simple form-based generator for enhanced web content with tabbed information displays.">
+<meta property="og:title" content="SmartLinks Generator - Create Interactive Content">
+<meta property="og:description" content="Transform your content with SmartLinks. Simple form creates professional interactive content with tabbed information displays.">
+<meta property="og:url" content="http://www.itabs.ai/generator">
+<meta property="og:image" content="https://i.ibb.co/7QZnQDp/smartlinks-generator-preview.png">
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+    }
+    
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        overflow: hidden;
+    }
+    
+    .header {
+        background: linear-gradient(135deg, #0a66c2 0%, #084d94 100%);
+        color: white;
+        padding: 40px 30px;
+        text-align: center;
+    }
+    
+    .header h1 {
+        font-size: 32px;
+        margin-bottom: 10px;
+        font-weight: 700;
+    }
+    
+    .header p {
+        font-size: 18px;
+        opacity: 0.9;
+    }
+    
+    .form-section {
+        padding: 40px 30px;
+    }
+    
+    .step {
+        margin-bottom: 40px;
+        padding: 25px;
+        background: #f8f9fa;
+        border-radius: 8px;
+        border-left: 4px solid #0a66c2;
+    }
+    
+    .step-number {
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        background: #0a66c2;
+        color: white;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 32px;
+        font-weight: bold;
+        margin-right: 15px;
+        font-size: 16px;
+    }
+    
+    .step-title {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: #2c3e50;
+        display: flex;
+        align-items: center;
+    }
+    
+    .form-group {
+        margin-bottom: 25px;
+    }
+    
+    .form-label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #2c3e50;
+        font-size: 16px;
+    }
+    
+    .form-input, .form-textarea {
+        width: 100%;
+        padding: 15px;
+        border: 2px solid #e1e5e9;
+        border-radius: 8px;
+        font-size: 16px;
+        font-family: inherit;
+        transition: all 0.3s ease;
+        background: white;
+    }
+    
+    .form-input:focus, .form-textarea:focus {
+        outline: none;
+        border-color: #0a66c2;
+        box-shadow: 0 0 0 3px rgba(10, 102, 194, 0.1);
+    }
+    
+    .form-textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+    
+    .form-help {
+        font-size: 14px;
+        color: #6c757d;
+        margin-top: 5px;
+        line-height: 1.4;
+    }
+    
+    .generate-btn, .clear-btn {
+        color: white;
+        border: none;
+        padding: 18px 40px;
+        border-radius: 8px;
+        font-size: 18px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: block;
+        width: 100%;
+        margin-top: 15px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .generate-btn {
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    }
+    
+    .generate-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3);
+    }
+    
+    .clear-btn {
+        background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+        font-size: 16px;
+        padding: 12px 30px;
+        margin-top: 10px;
+    }
+    
+    .clear-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 20px rgba(108, 117, 125, 0.3);
+    }
+    
+    .generate-btn:active, .clear-btn:active {
+        transform: translateY(0);
+    }
+    
+    .output-section {
+        display: none;
+        margin-top: 40px;
+        padding: 30px;
+        background: #f8f9fa;
+        border-radius: 8px;
+        border: 1px solid #e1e5e9;
+    }
+    
+    .output-title {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: #28a745;
+        text-align: center;
+    }
+    
+    .code-container {
+        background: #2d3748;
+        color: #e2e8f0;
+        padding: 25px;
+        border-radius: 8px;
+        font-family: 'Courier New', monospace;
+        font-size: 14px;
+        line-height: 1.5;
+        max-height: 400px;
+        overflow-y: auto;
+        margin-bottom: 20px;
+        white-space: pre-wrap;
+        position: relative;
+    }
+    
+    .copy-btn {
+        background: #28a745;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: background 0.3s ease;
+        display: block;
+        margin: 0 auto;
+    }
+    
+    .copy-btn:hover {
+        background: #218838;
+    }
+    
+    .instructions {
+        margin-top: 25px;
+        padding: 20px;
+        background: #e8f4fd;
+        border-radius: 8px;
+        border-left: 4px solid #0a66c2;
+    }
+    
+    .instructions h4 {
+        color: #0a66c2;
+        margin-bottom: 15px;
+        font-size: 18px;
+    }
+    
+    .instructions ul {
+        margin: 0;
+        padding-left: 20px;
+    }
+    
+    .instructions li {
+        margin-bottom: 8px;
+        color: #495057;
+    }
+    
+    .example-section {
+        margin-top: 30px;
+        padding: 25px;
+        background: #fff3cd;
+        border-radius: 8px;
+        border-left: 4px solid #ffc107;
+    }
+    
+    .example-title {
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: #856404;
+        font-size: 16px;
+    }
+    
+    .example-text {
+        font-size: 14px;
+        color: #856404;
+        line-height: 1.5;
+        font-style: italic;
+    }
+    
+    @media (max-width: 768px) {
+        .header {
+            padding: 30px 20px;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+        }
+        
+        .form-section {
+            padding: 30px 20px;
+        }
+        
+        .step {
+            padding: 20px;
+        }
+    }
+</style>
+```
+
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>SmartLinks Generator</h1>
+            <p>Create interactive content with enhanced links in minutes</p>
+        </div>
+
+```
+    <div class="form-section">
+        <form id="smartLinksForm">
+            <div class="step">
+                <div class="step-title">
+                    <span class="step-number">1</span>
+                    Your Main Content
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Content Title</label>
+                    <input type="text" class="form-input" id="contentTitle" value="The Future of Customer Service: How AI is Transforming Business Interactions">
+                    <div class="form-help">A compelling headline for your content</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Main Content</label>
+                    <textarea class="form-textarea" id="mainContent" style="min-height: 300px;">Customer service is experiencing a revolution. Just last quarter, our company implemented an AI-powered customer service system, and the results have been remarkable.
+```
+
+We’re seeing 40% faster response times, 35% higher customer satisfaction scores, and our support team can now handle 3x more inquiries without increasing headcount.
+
+But this isn’t just about efficiency. The real breakthrough is in personalization. Our AI system can analyze customer history, predict their needs, and provide tailored solutions before they even finish explaining their problem.
+
+This kind of intelligent automation is becoming essential for modern businesses. Companies that don’t adapt risk falling behind competitors who can offer instant, personalized service 24/7.
+
+The technology has advanced to the point where customers often prefer AI assistance for simple queries, saving human agents for complex issues that truly require empathy and creative problem-solving.
+
+Looking ahead, I believe we’re moving toward a hybrid model where AI handles routine tasks while humans focus on relationship building and strategic customer success initiatives.
+
+What’s your experience with AI in customer service? Have you seen similar transformations in your industry?</textarea>
+<div class="form-help">Your blog post, article, or social media content</div>
+</div>
+</div>
+
+```
+            <div class="step">
+                <div class="step-title">
+                    <span class="step-number">2</span>
+                    SmartLink Enhancement
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Term to Enhance</label>
+                    <input type="text" class="form-input" id="enhanceTerm" value="intelligent automation">
+                    <div class="form-help">A key term from your content that needs explanation</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Link Destination (optional)</label>
+                    <input type="url" class="form-input" id="linkDestination" value="https://www.mckinsey.com/capabilities/operations/our-insights/the-future-of-work-in-america">
+                    <div class="form-help">Where should the link go when clicked?</div>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-title">
+                    <span class="step-number">3</span>
+                    Information Tabs
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Overview (Required)</label>
+                    <textarea class="form-textarea" id="overviewTab" style="min-height: 100px;">AI-powered systems that can automatically handle routine tasks, make decisions, and adapt to new situations without constant human intervention.</textarea>
+                    <div class="form-help">Quick definition or explanation</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Details (Optional)</label>
+                    <textarea class="form-textarea" id="detailsTab" style="min-height: 120px;">Intelligent automation combines artificial intelligence with robotic process automation (RPA) to create systems that can understand context, learn from patterns, and make complex decisions. Unlike traditional automation that follows rigid rules, intelligent automation can adapt to variations, handle exceptions, and improve performance over time through machine learning.</textarea>
+                    <div class="form-help">In-depth explanation, how it works, examples</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Benefits (Optional)</label>
+                    <textarea class="form-textarea" id="benefitsTab" style="min-height: 120px;">Studies show intelligent automation can reduce operational costs by 25-40%, improve accuracy by up to 90%, and enable 24/7 service availability. It frees human workers to focus on strategic, creative, and relationship-building activities while ensuring consistent, high-quality customer experiences. Companies using intelligent automation report faster time-to-market and improved competitive advantage.</textarea>
+                    <div class="form-help">Business value, ROI, industry impact</div>
+                </div>
+            </div>
+            
+            <button type="button" class="generate-btn" onclick="generateSmartLinks()">
+                Generate SmartLinks Content
+            </button>
+            
+            <button type="button" class="clear-btn" onclick="clearForm()">
+                Clear Form to Create Your Own
+            </button>
+            
+            <button type="button" class="test-btn" onclick="showOutputSection()" style="background: #ffc107; color: #212529; padding: 12px 30px; border-radius: 6px; border: none; cursor: pointer; width: 100%; margin-top: 10px; font-weight: 600;">
+                Test - Show Output Section
+            </button>
+        </form>
+        
+        <div class="example-section">
+            <div class="example-title">✨ Try the Demo First!</div>
+            <div class="example-text">
+                This form is pre-filled with a complete example about AI customer service. Click "Generate SmartLinks Content" to see how it works, then use "Clear Form" to create your own content.
+            </div>
+        </div>
+        
+        <div class="output-section" id="outputSection">
+            <div class="output-title">🎉 Your SmartLinks Content is Ready!</div>
+            <div class="code-container" id="generatedOutput"></div>
+            <button class="copy-btn" onclick="copyToClipboard()">Copy HTML Code</button>
+            
+            <div class="instructions">
+                <h4>How to Use Your SmartLinks:</h4>
+                <ul>
+                    <li><strong>Copy the code above</strong> - Click the "Copy HTML Code" button</li>
+                    <li><strong>WordPress:</strong> Paste into a "Custom HTML" block</li>
+                    <li><strong>Medium/Substack:</strong> Use the HTML embed option</li>
+                    <li><strong>Website:</strong> Paste into your HTML editor</li>
+                    <li><strong>Test:</strong> Click the blue text with "i" indicators to see your SmartLinks in action!</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function generateSmartLinks() {
+        // Get form values
+        const title = document.getElementById('contentTitle').value.trim();
+        const content = document.getElementById('mainContent').value.trim();
+        const term = document.getElementById('enhanceTerm').value.trim();
+        const destination = document.getElementById('linkDestination').value.trim() || '#';
+        const overview = document.getElementById('overviewTab').value.trim();
+        const details = document.getElementById('detailsTab').value.trim();
+        const benefits = document.getElementById('benefitsTab').value.trim();
+        
+        // Validation
+        if (!title || !content || !term || !overview) {
+            alert('Please fill in the required fields: Title, Content, Term, and Overview');
+            return;
+        }
+        
+        // Create SmartLink ID
+        const linkId = 'smartlink_' + Date.now();
+        
+        // Replace term in content with SmartLink
+        const termRegex = new RegExp(`\\b${escapeRegex(term)}\\b`, 'gi');
+        const enhancedContent = content.replace(termRegex, 
+            `<span class="smart-link" onclick="handleSmartLinkClick(event, '${linkId}', '${destination}')">${term}<span class="i-indicator" onclick="event.stopPropagation(); showPopup('${linkId}')">i</span></span>`
+        );
+        
+        // Build tabs
+        const tabs = [];
+        const tabContents = [];
+        
+        if (overview) {
+            tabs.push('Overview');
+            tabContents.push(overview);
+        }
+        if (details) {
+            tabs.push('Details');
+            tabContents.push(details);
+        }
+        if (benefits) {
+            tabs.push('Benefits');
+            tabContents.push(benefits);
+        }
+        
+        // Generate complete HTML
+        const html = generateCompleteHTML(title, enhancedContent, linkId, term, tabs, tabContents, destination);
+        
+        // Display output
+        document.getElementById('generatedOutput').textContent = html;
+        document.getElementById('outputSection').style.display = 'block';
+        document.getElementById('outputSection').scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    function escapeRegex(string) {
+        return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+    
+    function generateCompleteHTML(title, content, linkId, term, tabs, tabContents, destination) {
+        const popupHTML = `
+<!-- SmartLinks Popup -->
+<div class="popup" id="popup-${linkId}">
+    <div class="popup-header">
+        ${term}
+        <button class="close-btn" onclick="closeAllPopups()">&times;</button>
+    </div>
+    <div class="popup-tabs">
+        ${tabs.map((tab, index) => 
+            `<button class="tab ${index === 0 ? 'active' : ''}" onclick="switchTab('${linkId}', ${index})">${tab}</button>`
+        ).join('')}
+    </div>
+    <div class="popup-content">
+        ${tabContents.map((content, index) => 
+            `<div class="tab-content ${index === 0 ? 'active' : ''}">${content.replace(/\n/g, '<br>')}${destination !== '#' ? `<br><br><button class="visit-link-btn" onclick="window.open('${destination}', '_blank')">Learn More</button>` : ''}</div>`
+        ).join('')}
+    </div>
+</div>`;
+        
+        return `<!DOCTYPE html>
+```
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${title} - SmartLinks Enhanced</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; line-height: 1.6; margin: 0; padding: 20px; background: #f8f9fa; color: #333; }
+        .content { max-width: 800px; margin: 0 auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h1 { font-size: 32px; font-weight: 700; margin-bottom: 30px; color: #2c3e50; text-align: center; }
+        .article-content { font-size: 18px; line-height: 1.8; }
+        .smart-link { color: #0a66c2; text-decoration: underline; position: relative; cursor: pointer; font-weight: 600; transition: color 0.3s ease; }
+        .smart-link:hover { color: #084d94; }
+        .i-indicator { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; background: #0a66c2; color: white; border-radius: 50%; font-size: 12px; font-style: italic; font-weight: bold; margin-left: 4px; position: relative; top: -2px; transition: all 0.3s ease; z-index: 10; }
+        .smart-link:hover .i-indicator { background: #084d94; transform: scale(1.1); }
+        .popup { position: fixed; background: white; border: 1px solid #e6e6e6; border-radius: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.15); width: 450px; max-width: 90vw; z-index: 1000; display: none; }
+        .popup.show { display: block; animation: popupShow 0.3s ease-out; }
+        @keyframes popupShow { from { opacity: 0; transform: translate(-50%, -60%); } to { opacity: 1; transform: translate(-50%, -50%); } }
+        .popup-header { background: #0a66c2; color: white; padding: 18px 25px; border-radius: 15px 15px 0 0; font-weight: 700; font-size: 18px; position: relative; }
+        .close-btn { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); background: none; border: none; color: white; font-size: 24px; cursor: pointer; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: background 0.3s ease; }
+        .close-btn:hover { background: rgba(255,255,255,0.2); }
+        .popup-tabs { display: flex; border-bottom: 1px solid #e6e6e6; }
+        .tab { flex: 1; padding: 15px 12px; text-align: center; background: #f8f9fa; border: none; font-size: 14px; font-weight: 600; color: #666; cursor: pointer; transition: all 0.3s ease; }
+        .tab:hover { background: rgba(10, 102, 194, 0.1); color: #0a66c2; }
+        .tab.active { background: white; color: #0a66c2; border-bottom: 3px solid #0a66c2; }
+        .popup-content { padding: 25px; font-size: 15px; line-height: 1.7; min-height: 150px; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 999; display: none; }
+        .visit-link-btn { background: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 600; margin-top: 15px; transition: background 0.3s ease; }
+        .visit-link-btn:hover { background: #218838; }
+        .footer { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #e6e6e6; color: #6c757d; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>${title}</h1>
+        <div class="article-content">
+            ${content.replace(/\n/g, '<br><br>')}
+        </div>
+        <div class="footer">
+            Enhanced with <strong>SmartLinks</strong> technology • <a href="http://www.itabs.ai/" target="_blank" style="color: #0a66c2;">Create your own</a>
+        </div>
+    </div>
+
+```
+<!-- Overlay -->
+<div class="overlay" id="overlay" onclick="closeAllPopups()"></div>
+
+${popupHTML}
+
+<script>
+    let currentPopup = null;
+
+    function handleSmartLinkClick(event, popupId, destinationUrl) {
+        if (destinationUrl !== '#') {
+            window.open(destinationUrl, '_blank');
+        }
+    }
+
+    function showPopup(popupId) {
+        closeAllPopups();
+        document.getElementById('overlay').style.display = 'block';
+        const popup = document.getElementById('popup-' + popupId);
+        popup.classList.add('show');
+        popup.style.top = '50%';
+        popup.style.left = '50%';
+        popup.style.transform = 'translate(-50%, -50%)';
+        currentPopup = popup;
+    }
+
+    function closeAllPopups() {
+        document.getElementById('overlay').style.display = 'none';
+        const popups = document.querySelectorAll('.popup');
+        popups.forEach(popup => popup.classList.remove('show'));
+        currentPopup = null;
+    }
+
+    function switchTab(popupId, tabIndex) {
+        const popup = document.getElementById('popup-' + popupId);
+        const tabs = popup.querySelectorAll('.tab');
+        const contents = popup.querySelectorAll('.tab-content');
+        tabs.forEach(tab => tab.classList.remove('active'));
+        contents.forEach(content => content.classList.remove('active'));
+        tabs[tabIndex].classList.add('active');
+        contents[tabIndex].classList.add('active');
+    }
+
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            closeAllPopups();
+        }
+    });
+</script>
+```
+
+</body>
+</html>`;
+        }
+
+```
+    function clearForm() {
+        // Clear all form fields
+        document.getElementById('contentTitle').value = '';
+        document.getElementById('mainContent').value = '';
+        document.getElementById('enhanceTerm').value = '';
+        document.getElementById('linkDestination').value = '';
+        document.getElementById('overviewTab').value = '';
+        document.getElementById('detailsTab').value = '';
+        document.getElementById('benefitsTab').value = '';
+        
+        // Hide output section if visible
+        document.getElementById('outputSection').style.display = 'none';
+        
+        // Scroll to top of form
+        document.getElementById('smartLinksForm').scrollIntoView({ behavior: 'smooth' });
+        
+        // Show feedback
+        const btn = document.querySelector('.clear-btn');
+        const originalText = btn.textContent;
+        btn.textContent = '✅ Form Cleared!';
+        btn.style.background = 'linear-gradient(135deg, #28a745 0%, #20c997 100%)';
+        setTimeout(() => {
+            btn.textContent = originalText;
+            btn.style.background = '';
+        }, 2000);
+    }
+        const codeContent = document.getElementById('generatedOutput').textContent;
+        navigator.clipboard.writeText(codeContent).then(function() {
+            const btn = document.querySelector('.copy-btn');
+            const originalText = btn.textContent;
+            btn.textContent = '✅ Copied!';
+            btn.style.background = '#28a745';
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.style.background = '';
+            }, 2000);
+        }).catch(function() {
+            // Fallback for older browsers
+            const textarea = document.createElement('textarea');
+            textarea.value = codeContent;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            alert('Code copied to clipboard!');
+        });
+    }
+</script>
+
+</body>
+</html>
